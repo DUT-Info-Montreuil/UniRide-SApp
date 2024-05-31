@@ -2,9 +2,15 @@ FROM node:20.9-alpine
 
 WORKDIR /app
 
-ARG PRODUCTION
+ARG production
+ARG backUrl
+ARG frontUrl
+ARG googleKey
 
-ENV PRODUCTION=$PRODUCTION
+ENV production=$production \
+    backUrl=$backUrl \
+    frontUrl=$frontUrl \
+    googleKey=$googleKey
 
 #Copy package.json and package-lock.json to avoid reinstalling dependencies when only code changes
 COPY package*.json ./
