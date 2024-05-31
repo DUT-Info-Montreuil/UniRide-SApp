@@ -1,5 +1,7 @@
 // src/environments/environment.ts
 export const environment = {
-    production: false,
-    backUrl: 'https://127.0.0.1:5050', // URL de développement
+  production: true,
+  backUrl: '${ENV_BACKEND_URI}', // URL de développement
+  frontUrl: '${FRONT_URI}',
+  googleKey: '${GOOGLE_API_KEY}'
 };
