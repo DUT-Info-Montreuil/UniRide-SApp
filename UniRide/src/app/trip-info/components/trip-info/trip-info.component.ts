@@ -10,7 +10,7 @@ import { tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from '../../../core/services/book/book.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { environment } from 'src/environements/environement';
+import { environment } from 'src/environments/environment';
 import { Book } from 'src/app/core/models/book.models';
 import { RatingComponent } from '../rating/rating.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
