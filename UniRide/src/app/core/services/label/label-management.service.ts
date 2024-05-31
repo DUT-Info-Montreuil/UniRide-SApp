@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from '../../../../environements/environement';
+import { environment } from '../../../../environments/environment';
 import { LabelInterface } from '../../interface/label.interface';
 import { Label } from '../../models/label.model';
 
