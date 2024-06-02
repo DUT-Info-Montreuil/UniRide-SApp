@@ -123,4 +123,16 @@ export class TripService {
       { headers: headers }
     )
   }
+
+  modifyTrip(tripData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.post(
+      `${this.backUrl}/trip/modify`,
+      JSON.stringify(tripData),
+      { headers: headers }
+    );
+  }
 }

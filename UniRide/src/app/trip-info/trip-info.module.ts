@@ -7,6 +7,7 @@ import { PassengersListComponent } from './components/passengers-list/passengers
 import { QRCodeModule } from 'angularx-qrcode';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { ModifyTripComponent } from './components/modify-trip/modify-trip.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RatingComponent } from './components/rating/rating.component';
     UserInfoSummaryComponent,
     PassengersListComponent,
     UserInfoComponent,
-    RatingComponent
+    RatingComponent,
+    ModifyTripComponent
   ],
   imports: [
     SharedModule,
