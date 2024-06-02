@@ -23,13 +23,13 @@ export class UserInfoComponent implements OnInit {
     this.userService.getUserInfoDetails(this.config.data.userid).subscribe({
       next: (data: any) => {
         this.user = {
-          id: data.id,
-          firstname: data.firstname,
-          lastname: data.lastname,
-          gender: data.gender,
-          description: data.description,
-          phone_number: data.phone_number,
-          profile_picture: data.profile_picture??""
+          id: data.user_information.id,
+          firstname: data.user_information.firstname,
+          lastname: data.user_information.lastname,
+          gender: data.user_information.gender,
+          description: data.user_information.description,
+          phone_number: data.user_information.phone_number,
+          profile_picture: data.user_information.profile_picture??""
         }
       },
       error: (error: any) => {
