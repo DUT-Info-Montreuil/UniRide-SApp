@@ -12,6 +12,7 @@ app/**/*.js.map
 uniride-backend-dev.env
 docker-compose.debug.yml
 Dockerfile.dev
+environment.ts
 
 # dependencies
 node_modules/

@@ -12,4 +12,5 @@ export class Trip {
     status?: number;
     totalNumberOfPassenger?: number;
     arrivalDate?: Date;
+
 }
