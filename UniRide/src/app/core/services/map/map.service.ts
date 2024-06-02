@@ -3,7 +3,7 @@ import { AddressService } from '../address/address.service';
 import { __runInitializers } from 'tslib';
 import { FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { environment } from 'src/environements/environement';
+import { environment } from 'src/environments/environment';
 
 declare var google: any;
 

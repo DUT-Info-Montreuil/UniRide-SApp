@@ -25,8 +25,8 @@ EXPOSE 4200
 #Build the app Angular
 RUN npm install -g @angular/cli
 
-ENTRYPOINT [ "ng" ]
-
 # Start the app Angular with SSL
 #We need to add host to allow the container to be accessed from outside
-CMD ["serve", "--ssl", "true", "--ssl-cert", "certs/flask-selfsigned.crt", "--ssl-key", "certs/flask-selfsigned.key", "--host", "0.0.0.0"]
+CMD apk add --no-cache gettext \
+    && envsubst < src/environments/environment.template.ts > src/environments/environment.ts \
+    && ng serve --ssl true --ssl-cert certs/flask-selfsigned.crt --ssl-key certs/flask-selfsigned.key --host 0.0.0.0
