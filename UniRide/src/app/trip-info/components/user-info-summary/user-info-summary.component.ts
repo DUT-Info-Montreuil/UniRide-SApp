@@ -34,7 +34,8 @@ export class UserInfoSummaryComponent implements OnInit {
           id: data.id,
           firstname: data.firstname,
           lastname: data.lastname,
-          description: data.description
+          description: data.description,
+          profile_picture: data.profile_picture
         }
       },
       error: (err) => console.error(err)
