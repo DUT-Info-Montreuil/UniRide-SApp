@@ -1,7 +1,7 @@
 <h1 class="text-white">Trajets Conducteur</h1>
-<p-button pRipple severity="danger" label="Delete" icon="pi pi-trash" (click)="deleteSelectedTrips(trip)" [disabled]="!selectedProducts || !selectedProducts.length" />
+<p-button pRipple severity="danger" label="Delete" icon="pi pi-trash" (click)="deleteSelectedTrips()" [disabled]="!selectedTrips || !selectedTrips.length"></p-button>
 
-<p-table [value]="trips" [(selection)]="selectedProducts" [tableStyle]="{'min-width': '60rem'}" [loading]="loading" dataKey="id" [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [filterDelay]="0">
+<p-table [value]="trips" [(selection)]="selectedTrips" [tableStyle]="{'min-width': '60rem'}" [loading]="loading" dataKey="id" [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 4rem">
@@ -26,26 +26,19 @@
         </tr>
     </ng-template>
 
-
     <ng-template pTemplate="body" let-trip>
         <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)">
             <td>
                 <p-tableCheckbox [value]="trip" (click)="$event.stopPropagation()" />
             </td>
             <td>
-                <p-tag [value]="getStatus(trip.status)" [severity]="getSeverity(trip.status)">
-                </p-tag>
+                <p-tag [value]="getStatus(trip.status)" [severity]="getSeverity(trip.status)"></p-tag>
             </td>
-            <td>
-                {{trip.proposedDate | date: 'dd/MM/yyyy'}}
-            </td>
-            <td>
-                {{trip.departure.name}}
-            </td>
-            <td>
-                {{trip.arrival.name}}
-            </td>
+            <td>{{ trip.proposedDate | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ trip.departure.name }}</td>
+            <td>{{ trip.arrival.name }}</td>
         </tr>
     </ng-template>
-
 </p-table>
+
+<p-confirmDialog></p-confirmDialog>

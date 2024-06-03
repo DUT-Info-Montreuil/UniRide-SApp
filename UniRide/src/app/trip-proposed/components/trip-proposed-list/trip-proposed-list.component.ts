@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TripService } from '../../../core/services/trip/trip.service';
 import { Trip } from '../../../core/models/trip.models';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
 
 @Component({
   selector: 'app-trip-proposed-list',
   templateUrl: './trip-proposed-list.component.html',
   styleUrls: ['./trip-proposed-list.component.css'],
   providers: [ConfirmationService],
-
 })
 export class TripProposedListComponent implements OnInit {
 
@@ -20,12 +17,14 @@ export class TripProposedListComponent implements OnInit {
   totalPage!: number;
   subscriptionComplete: boolean = false;
   loading: boolean = true;
-  trip!: Trip;
-  selectedProducts!: Trip[] | null;
+  selectedTrips!: Trip[] | null;
 
-
-
-  constructor(private tripService: TripService, private router: Router, private confirmationService: ConfirmationService,private messageService: MessageService) { }
+  constructor(
+    private tripService: TripService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.tripService.getTripsProposed().subscribe({
@@ -51,7 +50,7 @@ export class TripProposedListComponent implements OnInit {
         });
       },
       complete: () => {
-        this.trips = [...this.trips]
+        this.trips = [...this.trips];
         this.loading = false;
         console.log(this.trips);
       }
@@ -59,25 +58,27 @@ export class TripProposedListComponent implements OnInit {
   }
 
   goToTripDetails(trip_id: number) {
-    console.log(trip_id)
+    console.log(trip_id);
     this.router.navigate([`/trips/${trip_id}`]);
-
   }
 
-
-  deleteSelectedTrips(trip: Trip) {
-    console.log(trip)
-    this.confirmationService.confirm({
-        message: 'Etes vous sûr de supprimer ce(s) trajet(s) ?',
-        header: 'Confirm',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          console.log(trip)
-            this.trips = this.trips.filter((val) => val.id !== trip.id);
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-        }
-    });
-}
+  deleteSelectedTrips() {
+    if (this.selectedTrips && this.selectedTrips.length > 0) {
+      console.log(this.selectedTrips)
+        this.confirmationService.confirm({
+            message: 'Etes-vous sûr de vouloir supprimer ces trajets ?',
+            header: 'Confirmer',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.selectedTrips!.forEach(trip => {
+                    this.trips = this.trips.filter(val => val.id !== trip.id);
+                });
+                this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Trajet(s) supprimé(s)', life: 3000 });
+                this.selectedTrips = null; // Réinitialiser la sélection après la suppression
+            }
+        });
+    }
+  }
 
   getStatus(status: number): string {
     switch (status) {
