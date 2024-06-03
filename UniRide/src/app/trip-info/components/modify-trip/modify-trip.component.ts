@@ -97,7 +97,7 @@ export class ModifyTripComponent implements OnInit {
   }
 
   checkCanModify(): void {
-    if (this.trip.driverId != this.userId || this.trip.status != 1) {
+    if (this.trip.driverId != this.userId || this.trip.status != 1 || (this.trip.numberOfPassenger != undefined && this.trip.numberOfPassenger > 0)) {
       this.router.navigate([`unauthorized`]);
     }
   }
@@ -135,7 +135,7 @@ export class ModifyTripComponent implements OnInit {
                 total_passenger_count: this.tripForm.value.passengerNumber,
               };
               this.tripService.modifyTrip(tripData).subscribe(
-                (tripId) => {
+                () => {
                   this.messageService.add({ severity: 'success', summary: 'Trajet modifié avec succès' });
                   console.log('Trajet modifié avec succès, ID :', this.trip.id);
                   setTimeout(() => this.router.navigate([`trips/${this.trip.id}`]), 2000);
@@ -144,9 +144,12 @@ export class ModifyTripComponent implements OnInit {
                   if (tripError.error.message == "INVALID_TIMESTAMP_PROPOSED") {
                     this.scrollToSection('map');
                     this.messageService.add({ severity: 'error', summary: 'La date et/ou l\'heure du trajet sont invalides' });
+                  } else if (tripError.error.message == "TRIP_HAS_PASSENGERS") {
+                    this.scrollToSection('map');
+                    this.messageService.add({ severity: 'error', summary: 'Vous ne pouvez pas modifier un trajet ayant des passagers' });
                   } else if (tripError.error.message == "TRIP_ALREADY_EXISTS") {
                     this.scrollToSection('map');
-                    this.messageService.add({ severity: 'error', summary: 'Un trajet identique existe déjà' });
+                    this.messageService.add({ severity: 'error', summary: 'Un trajet identique existe déjà ou vous n\'avez modifié aucun champs' });
                   } else {
                     console.error('Erreur lors de la modification du trajet', tripError);
                     this.scrollToSection('map');

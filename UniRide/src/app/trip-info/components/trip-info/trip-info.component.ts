@@ -293,7 +293,7 @@ export class TripInfoComponent implements OnInit {
   }
   
   checkCanModify(): void {
-    this.canModify = this.trip.driverId == this.userId && this.trip.status == 1;
+    this.canModify = this.trip.driverId == this.userId && this.trip.status == 1  && (this.trip.numberOfPassenger == undefined || this.trip.numberOfPassenger == 0);
   }
 
   modifyTrip(): void {
