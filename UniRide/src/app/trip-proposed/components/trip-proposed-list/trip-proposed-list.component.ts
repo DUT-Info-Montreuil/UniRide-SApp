@@ -64,21 +64,32 @@ export class TripProposedListComponent implements OnInit {
 
   deleteSelectedTrips() {
     if (this.selectedTrips && this.selectedTrips.length > 0) {
-      console.log(this.selectedTrips)
+        console.log(this.selectedTrips);
         this.confirmationService.confirm({
             message: 'Etes-vous sûr de vouloir supprimer ces trajets ?',
             header: 'Confirmer',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
+                // Appeler deleteTripsById pour chaque trip dans selectedTrips
                 this.selectedTrips!.forEach(trip => {
-                    this.trips = this.trips.filter(val => val.id !== trip.id);
+                    this.tripService.deleteTripsById(trip.id).subscribe(
+                        () => {
+                            // Supprimer le trip de la liste après suppression réussie
+                            this.trips = this.trips.filter(val => val.id !== trip.id);
+                        },
+                        error => {
+                            console.error(`Erreur lors de la suppression du trajet avec l'ID ${trip.id}:`, error);
+                        }
+                    );
                 });
+
                 this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Trajet(s) supprimé(s)', life: 3000 });
                 this.selectedTrips = null; // Réinitialiser la sélection après la suppression
             }
         });
     }
-  }
+}
+
 
   getStatus(status: number): string {
     switch (status) {

@@ -28,6 +28,16 @@ export class TripService {
     );
   }
 
+  deleteTripsById(tripID: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete(
+      `${this.backUrl}/trip/delete/${tripID}`,
+      { headers: headers }
+    )
+  }
+
 
   createTripDaily(tripData: any): Observable<any> {
     const headers = new HttpHeaders({
