@@ -29,4 +29,4 @@ RUN npm install -g @angular/cli
 #We need to add host to allow the container to be accessed from outside
 CMD apk add --no-cache gettext \
     && envsubst < src/environments/environment.template.ts > src/environments/environment.ts \
-    && ng serve --ssl true --ssl-cert certs/flask-selfsigned.crt --ssl-key certs/flask-selfsigned.key --host 0.0.0.0
+    && ng serve --ssl true --ssl-cert certs/flask-selfsigned.crt --disable-host-check --ssl-key certs/flask-selfsigned.key --host 0.0.0.0
