@@ -2,7 +2,7 @@ FROM node:20.9-alpine
 
 WORKDIR /app
 
-ENV production='true'
+ENV production=true
 ENV backUrl='https://127.0.0.1:5050'
 ENV frontUrl='https://localhost:4200'
 ENV googleKey='AIzaSyBMreuA5LC2BJ2f-HFPPdzuadezahYISSIu0mSS2Ga'
