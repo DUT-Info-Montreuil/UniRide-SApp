@@ -33,7 +33,7 @@ export class TripService {
       'Content-Type': 'application/json'
     });
     return this.http.delete(
-      `${this.backUrl}/trip/delete/${tripID}`,
+      `${this.backUrl}/trip/trip-management/${tripID}`,
       { headers: headers }
     )
   }
