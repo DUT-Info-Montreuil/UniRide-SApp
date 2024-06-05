@@ -31,6 +31,7 @@ export class ProfilInformationComponent implements OnInit {
   userDocuments: UserDocuments[] = [];
   uploadedFiles: { [key: string]: File[] } = {};
   showUploadPhoto: boolean = false;
+  end_date_insurance!:Date;
   changePasswordFormData = {
     old_password: '',
     new_password: '',
@@ -49,6 +50,7 @@ export class ProfilInformationComponent implements OnInit {
     private profilService: ProfilService,
     private carService: CarService,
     private toastr: ToastrService,
+
   ) { }
 
   ngOnInit(): void {
@@ -275,10 +277,8 @@ export class ProfilInformationComponent implements OnInit {
 
 
   saveChanges(fieldName: keyof User): void {
-    console.log('fieldName:', fieldName);
     const nameRoute = this.convertRouteTypeUser(fieldName);
     const updatedValue = this.editedUser[fieldName] as string;
-  console.log('updatedValue:', updatedValue);
       if (updatedValue === this.user[fieldName]) {
         return;
       }
@@ -320,13 +320,31 @@ export class ProfilInformationComponent implements OnInit {
     );
   }
 
+  onDateSelect(event: any) {
+    this.end_date_insurance = event;
+    console.log("dateeee", this.end_date_insurance);
+  }
   onUpload(event: FileUploadHandlerEvent, document: UserDocuments, uploader: any) {
-    console.log('event:', event);
+    console.log('document:', document);
     const documentType = document.type;
     const nomDocument = this.convertType(documentType);
 
     if (event.files && event.files.length > 0) {
       const file = event.files[0];
+
+       // Vérifier si le document est de type 'insurance'
+    if (documentType === 'insurance') {
+      // Récupérer la nouvelle date d'expiration depuis le calendrier
+        this.profilService.addEndDateInsurance(this.formattedDate(this.end_date_insurance)).subscribe({
+          next: (data: any) => {
+            this.toastr.success('La date d\'expiration de l\'assurance a été enregistré avec succés .', 'Succès');
+          
+          },
+          error: (error: any) => {
+            this.toastr.error('Erreur lors du changement de la date d\'expiration de l\'assurance.', 'Erreur');
+          }
+        });
+      }
 
       this.profilService.saveDocument(file, this.convertDataType(documentType), this.convertRouteType(documentType)).subscribe({
         next: (data: any) => {
@@ -348,7 +366,14 @@ export class ProfilInformationComponent implements OnInit {
       console.log('Aucun fichier sélectionné.');
     }
   }
+  private formattedDate(dateString: Date): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Ajoute un zéro si le mois est < 10
+    const day = date.getDate().toString().padStart(2, '0'); // Ajoute un zéro si le jour est < 10
 
+    return `${year}-${month}-${day}`;
+  }
   convertFileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -390,6 +415,7 @@ export class ProfilInformationComponent implements OnInit {
   openNew() {
     this.editPasswordDialog = true;
   }
+
 
   passwordsMatch(): boolean {
     const password = this.changePasswordFormData.new_password;

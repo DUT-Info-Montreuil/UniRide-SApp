@@ -224,8 +224,20 @@
 
               <div class="flex align-items-center gap-3">
                 <p-tag [value]="convertirStatus(document.status)" [severity]="getSeverity(document.status)"></p-tag>
-              </div>
+              
               <div *ngIf="document.status === '-1'" class="text-danger">{{ document.description }}</div>
+              <div *ngIf="document.type === 'insurance'" class="text-2xl font-bold text-900">
+                
+                Date d'expiration :
+                <p-calendar formControlName="date" [showIcon]="true" [touchUI]="true"  [showButtonBar]="true"
+                [readonlyInput]="true" (onSelect)="onDateSelect($event)" placeholder="{{document.end_date_insurance | date: 'yyyy-MM-dd'}}" :pt="{
+                            :deep(.p-icon) {
+                                color: #3a82f6;
+                            },
+                          }"></p-calendar>
+
+              </div>
+            </div>
             </div>
           </div>
         </div>
