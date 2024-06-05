@@ -26,16 +26,13 @@ RUN curl \
     -o src/app/certs/flask-selfsigned.key \
     'https://pastebin.com/raw/FS2Dv8hp'
 
+RUN chmod +x entrypoint.sh
+
 #Which port the container will listen to
 EXPOSE 4200
 
 #Build the app Angular
 RUN npm install -g @angular/cli
 RUN apk add --no-cache gettext
-RUN envsubst < src/environments/environment.template.ts > src/environments/environment.ts
 
-ENTRYPOINT [ "ng" ]
-
-# Start the app Angular with SSL
-#We need to add host to allow the container to be accessed from outside
-CMD ["serve", "--ssl", "--ssl-cert", "src/app/certs/flask-selfsigned.crt", "--ssl-key", "src/app/certs/flask-selfsigned.key", "--host", "0.0.0.0", "--disable-host-check"]
+ENTRYPOINT [ "/app/entrypoint.sh" ]
