@@ -76,6 +76,7 @@ export class TripProposedListComponent implements OnInit {
                         () => {
                             // Supprimer le trip de la liste après suppression réussie
                             this.trips = this.trips.filter(val => val.id !== trip.id);
+                            location.reload()
                         },
                         error => {
                             console.error(`Erreur lors de la suppression du trajet avec l'ID ${trip.id}:`, error);
