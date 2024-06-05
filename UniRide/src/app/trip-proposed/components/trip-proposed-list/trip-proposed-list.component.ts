@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TripService } from '../../../core/services/trip/trip.service';
 import { Trip } from '../../../core/models/trip.models';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-trip-proposed-list',
   templateUrl: './trip-proposed-list.component.html',
-  styleUrls: ['./trip-proposed-list.component.css']
+  styleUrls: ['./trip-proposed-list.component.css'],
+  providers: [ConfirmationService],
 })
 export class TripProposedListComponent implements OnInit {
 
@@ -16,8 +17,14 @@ export class TripProposedListComponent implements OnInit {
   totalPage!: number;
   subscriptionComplete: boolean = false;
   loading: boolean = true;
+  selectedTrips!: Trip[] | null;
 
-  constructor(private tripService: TripService, private router: Router) { }
+  constructor(
+    private tripService: TripService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.tripService.getTripsProposed().subscribe({
@@ -43,7 +50,7 @@ export class TripProposedListComponent implements OnInit {
         });
       },
       complete: () => {
-        this.trips = [...this.trips]
+        this.trips = [...this.trips];
         this.loading = false;
         console.log(this.trips);
       }
@@ -51,9 +58,39 @@ export class TripProposedListComponent implements OnInit {
   }
 
   goToTripDetails(trip_id: number) {
-    console.log(trip_id)
+    console.log(trip_id);
     this.router.navigate([`/trips/${trip_id}`]);
   }
+
+  deleteSelectedTrips() {
+    if (this.selectedTrips && this.selectedTrips.length > 0) {
+        console.log(this.selectedTrips);
+        this.confirmationService.confirm({
+            message: 'Etes-vous sûr de vouloir supprimer ces trajets ?',
+            header: 'Confirmer',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                // Appeler deleteTripsById pour chaque trip dans selectedTrips
+                this.selectedTrips!.forEach(trip => {
+                    this.tripService.deleteTripsById(trip.id).subscribe(
+                        () => {
+                            // Supprimer le trip de la liste après suppression réussie
+                            this.trips = this.trips.filter(val => val.id !== trip.id);
+                            location.reload()
+                        },
+                        error => {
+                            console.error(`Erreur lors de la suppression du trajet avec l'ID ${trip.id}:`, error);
+                        }
+                    );
+                });
+
+                this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Trajet(s) supprimé(s)', life: 3000 });
+                this.selectedTrips = null; // Réinitialiser la sélection après la suppression
+            }
+        });
+    }
+}
+
 
   getStatus(status: number): string {
     switch (status) {
