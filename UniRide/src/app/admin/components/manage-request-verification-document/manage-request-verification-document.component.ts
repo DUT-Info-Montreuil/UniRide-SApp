@@ -20,6 +20,7 @@ export class ManageRequestVerificationDocumentComponent implements OnInit {
   documents: DocumentVerification[] = [] // a changer avec un modele
   id_user: number = -1
   user: User = new User()
+  end_date_insurance!:Date
 
   @ViewChild('dv') dataView!: DataView
   length_reason_refusal: number = 5
@@ -65,6 +66,7 @@ export class ManageRequestVerificationDocumentComponent implements OnInit {
       next: (data: any) => {
         data.documents.forEach((documentGroup: any) => {
           documentGroup.document.forEach((document: any) => {
+            this.end_date_insurance=document.end_date_insurance
             const documentVerification = new DocumentVerification(document.url, document.status, document.type)
             this.documents.push(documentVerification)
             this.documents = [...this.documents]

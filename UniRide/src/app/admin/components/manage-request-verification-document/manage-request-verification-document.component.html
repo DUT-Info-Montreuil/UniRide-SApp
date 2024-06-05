@@ -19,6 +19,10 @@
                     class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                         <div class="text-2xl font-bold text-900">{{ convertTypeDocument(document.type) }}
+                            <div *ngIf="document.type === 'insurance'" class="text-2xl font-bold text-900">
+                                Date d'expiration :
+                                <input pInputText type="text" class="p-inputtext-sm" placeholder= "{{ end_date_insurance | date: 'yyyy-MM-dd' }}"  [disabled]="true" />
+                            </div>
                         </div>
                         <div class="flex align-items-center gap-3">
                             <span class="flex align-items-center gap-2">

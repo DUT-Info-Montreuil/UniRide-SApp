@@ -28,136 +28,144 @@
 
     </p-card>
     <div class="card">
-    <p-card header="Utilisateur">
+      <p-card header="Utilisateur">
 
-      <p class="m-0">Login:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.login }}" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('login')"></p-button>
+        <p class="m-0">Login:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.login }}" [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('login')"></p-button>
 
-        <p-dialog [(visible)]="editLoginDialog" [style]="{ width: '450px' }" header="Modification du login"
-        [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-          <div class="field">
-            <label for="new_login">Nouveau login</label>
-            <input pInputText type="text" [(ngModel)]="editedUser.login" required />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveChanges('login')"></button>
-        </ng-template>
-      </p-dialog>
-      </p>
-
-      <p class="m-0" id="pwd">Mot de passe:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="*********" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity=" " (click)="openNew()"></p-button>
-
-        <p-dialog [(visible)]="editPasswordDialog" [style]="{ width: '450px' }" header="Modification du mot de passe"
-          [modal]="true" styleClass="p-fluid">
-          <ng-template pTemplate="content">
-            <div class="field">
-              <label for="old_password">Ancien mot de passe</label>
-              <p-password [(ngModel)]="changePasswordFormData.old_password" [toggleMask]="true" required></p-password>
-            </div>
-            <div class="mb-4">
+          <p-dialog [(visible)]="editLoginDialog" [style]="{ width: '450px' }" header="Modification du login"
+            [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
               <div class="field">
-                <label for="new_password">Nouveau mot de passe</label>
-                <p-password [(ngModel)]="changePasswordFormData.new_password" [toggleMask]="true" required></p-password>
+                <label for="new_login">Nouveau login</label>
+                <input pInputText type="text" [(ngModel)]="editedUser.login" required />
               </div>
-              <div class="field">
-                <label for="confirmnew_password">Confirmer le Nouveau mot de passe</label>
-                <p-password [(ngModel)]="changePasswordFormData.new_password_confirmation" [toggleMask]="true"
-                  required></p-password>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="saveChanges('login')"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
 
-                <div *ngIf="!passwordsMatch()" class="ng-invalid ng-dirty">
-                  Les mots de passe ne correspondent pas.
+        <p class="m-0" id="pwd">Mot de passe:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="*********" [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity=" " (click)="openNew()"></p-button>
+
+          <p-dialog [(visible)]="editPasswordDialog" [style]="{ width: '450px' }" header="Modification du mot de passe"
+            [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="old_password">Ancien mot de passe</label>
+                <p-password [(ngModel)]="changePasswordFormData.old_password" [toggleMask]="true" required></p-password>
+              </div>
+              <div class="mb-4">
+                <div class="field">
+                  <label for="new_password">Nouveau mot de passe</label>
+                  <p-password [(ngModel)]="changePasswordFormData.new_password" [toggleMask]="true"
+                    required></p-password>
+                </div>
+                <div class="field">
+                  <label for="confirmnew_password">Confirmer le Nouveau mot de passe</label>
+                  <p-password [(ngModel)]="changePasswordFormData.new_password_confirmation" [toggleMask]="true"
+                    required></p-password>
+
+                  <div *ngIf="!passwordsMatch()" class="ng-invalid ng-dirty">
+                    Les mots de passe ne correspondent pas.
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
+            </ng-template>
 
-          <ng-template pTemplate="footer">
-            <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
-              (click)="changePassword()"></button>
-          </ng-template>
-        </p-dialog>
-      </p>
-      <p class="m-0">Prénom:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.firstname }}" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('firstname')"></p-button>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="changePassword()"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
+        <p class="m-0">Prénom:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.firstname }}" [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('firstname')"></p-button>
 
-        <p-dialog [(visible)]="editPrenomDialog" [style]="{ width: '450px' }" header="Modification du Prénom"
-        [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-          <div class="field">
-            <label for="new_firstname">Nouveau Prénom</label>
-            <input pInputText type="text" [(ngModel)]="editedUser.firstname" required />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveChanges('firstname')"></button>
-        </ng-template>
-      </p-dialog>
-      </p>
-      <p class="m-0">Nom:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.lastname }}" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('lastname')"></p-button>
+          <p-dialog [(visible)]="editPrenomDialog" [style]="{ width: '450px' }" header="Modification du Prénom"
+            [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="new_firstname">Nouveau Prénom</label>
+                <input pInputText type="text" [(ngModel)]="editedUser.firstname" required />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="saveChanges('firstname')"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
+        <p class="m-0">Nom:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.lastname }}" [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('lastname')"></p-button>
 
-        <p-dialog [(visible)]="editNomDialog" [style]="{ width: '450px' }" header="Modification du nom"
-        [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-          <div class="field">
-            <label for="new_lastname">Nouveau Nom</label>
-            <input pInputText type="text" [(ngModel)]="editedUser.lastname" required />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveChanges('lastname')"></button>
-        </ng-template>
-      </p-dialog>
-      </p>
-      <p class="m-0">Email:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.student_email }}" [disabled]="true" />
-      </p>
-      <!-- <p class="m-0">Genre:
+          <p-dialog [(visible)]="editNomDialog" [style]="{ width: '450px' }" header="Modification du nom" [modal]="true"
+            styleClass="p-fluid">
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="new_lastname">Nouveau Nom</label>
+                <input pInputText type="text" [(ngModel)]="editedUser.lastname" required />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="saveChanges('lastname')"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
+        <p class="m-0">Email:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.student_email }}"
+            [disabled]="true" />
+        </p>
+        <!-- <p class="m-0">Genre:
         <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.gender }}" [disabled]="true" />
       </p> -->
 
-      <p class="m-0">Numéro de téléphone:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.phone_number }}" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('phone_number')"></p-button>
-      
-        <p-dialog [(visible)]="editPhoneDialog" [style]="{ width: '450px' }" header="Modification du numéro de téléphone"
-        [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-          <div class="field">
-            <label for="new_phone_number">Nouveau numéro de téléphone</label>
-            <input pInputText type="text" [(ngModel)]="editedUser.phone_number" required />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveChanges('phone_number')"></button>
-        </ng-template>
-      </p-dialog>
-      </p>
-      <p class="m-0">Description:
-        <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.description }}" [disabled]="true" />
-        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('description')"></p-button>
-      
-        <p-dialog [(visible)]="editDescriptionDialog" [style]="{ width: '450px' }" header="Modification de la description"
-        [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-          <div class="field">
-            <label for="new_description">Nouvelle description</label>
-            <input pInputText type="text" [(ngModel)]="editedUser.description" required />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveChanges('description')"></button>
-        </ng-template>
-        </p-dialog>
-      </p>
-    </p-card>
+        <p class="m-0">Numéro de téléphone:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.phone_number }}"
+            [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('phone_number')"></p-button>
+
+          <p-dialog [(visible)]="editPhoneDialog" [style]="{ width: '450px' }"
+            header="Modification du numéro de téléphone" [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="new_phone_number">Nouveau numéro de téléphone</label>
+                <input pInputText type="text" [(ngModel)]="editedUser.phone_number" required />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="saveChanges('phone_number')"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
+        <p class="m-0">Description:
+          <input pInputText type="text" class="p-inputtext-sm" placeholder="{{ user.description }}" [disabled]="true" />
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="openDialog('description')"></p-button>
+
+          <p-dialog [(visible)]="editDescriptionDialog" [style]="{ width: '450px' }"
+            header="Modification de la description" [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+              <div class="field">
+                <label for="new_description">Nouvelle description</label>
+                <input pInputText type="text" [(ngModel)]="editedUser.description" required />
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"
+                (click)="saveChanges('description')"></button>
+            </ng-template>
+          </p-dialog>
+        </p>
+      </p-card>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Header II" [disabled]="isNotDriver">
@@ -224,20 +232,21 @@
 
               <div class="flex align-items-center gap-3">
                 <p-tag [value]="convertirStatus(document.status)" [severity]="getSeverity(document.status)"></p-tag>
-              
-              <div *ngIf="document.status === '-1'" class="text-danger">{{ document.description }}</div>
-              <div *ngIf="document.type === 'insurance'" class="text-2xl font-bold text-900">
-                
-                Date d'expiration :
-                <p-calendar formControlName="date" [showIcon]="true" [touchUI]="true"  [showButtonBar]="true"
-                [readonlyInput]="true" (onSelect)="onDateSelect($event)" placeholder="{{document.end_date_insurance | date: 'yyyy-MM-dd'}}" :pt="{
+
+                <div *ngIf="document.status === '-1'" class="text-danger">{{ document.description }}</div>
+                <div *ngIf="document.type === 'insurance'" class="text-2xl font-bold text-900">
+
+                  Date d'expiration :
+                  <p-calendar formControlName="date" [showIcon]="true" [touchUI]="true" [showButtonBar]="true"
+                    [readonlyInput]="true" (onSelect)="onDateSelect($event)"
+                    placeholder="{{document.end_date_insurance | date: 'yyyy-MM-dd'}}" :pt="{
                             :deep(.p-icon) {
                                 color: #3a82f6;
                             },
                           }"></p-calendar>
 
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>

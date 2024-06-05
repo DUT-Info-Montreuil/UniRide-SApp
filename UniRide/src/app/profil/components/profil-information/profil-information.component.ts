@@ -31,7 +31,7 @@ export class ProfilInformationComponent implements OnInit {
   userDocuments: UserDocuments[] = [];
   uploadedFiles: { [key: string]: File[] } = {};
   showUploadPhoto: boolean = false;
-  end_date_insurance!:Date;
+  end_date_insurance!: Date;
   changePasswordFormData = {
     old_password: '',
     new_password: '',
@@ -81,7 +81,6 @@ export class ProfilInformationComponent implements OnInit {
             this.userDocuments.push(userDocument);
           });
         });
-        console.log('userDocuments:', this.userDocuments);
       },
       error: (error) => {
         console.error('Erreur lors de la récupération des informations sur les documents', error);
@@ -206,19 +205,19 @@ export class ProfilInformationComponent implements OnInit {
   }
   convertRouteTypeUser(type: string) {
     switch (type) {
-      case'login':
+      case 'login':
         return 'login';
 
-      case'firstname':
+      case 'firstname':
         return 'firstname';
 
-      case'lastname': 
+      case 'lastname':
         return 'lastname';
 
-      case'phone_number': 
+      case 'phone_number':
         return 'phone-number';
 
-      case'description':
+      case 'description':
         return 'description';
 
       default:
@@ -279,22 +278,22 @@ export class ProfilInformationComponent implements OnInit {
   saveChanges(fieldName: keyof User): void {
     const nameRoute = this.convertRouteTypeUser(fieldName);
     const updatedValue = this.editedUser[fieldName] as string;
-      if (updatedValue === this.user[fieldName]) {
-        return;
-      }
-  
-      this.profilService.editUserInfo(nameRoute,fieldName, updatedValue).subscribe(
-        (response) => {
-          this.getuserInfo();
-          this.toastr.success(`Modification du champ enregistrée avec succès.`, 'Info');
-        },
-        (error) => {
-          console.error(`Erreur lors de l'enregistrement de la modification du champ ${fieldName}`, error);
-          this.toastr.error(`Erreur lors de la modification.`, 'Erreur');
-        }
-      );
+    if (updatedValue === this.user[fieldName]) {
+      return;
     }
-  
+
+    this.profilService.editUserInfo(nameRoute, fieldName, updatedValue).subscribe(
+      (response) => {
+        this.getuserInfo();
+        this.toastr.success(`Modification du champ enregistrée avec succès.`, 'Info');
+      },
+      (error) => {
+        console.error(`Erreur lors de l'enregistrement de la modification du champ ${fieldName}`, error);
+        this.toastr.error(`Erreur lors de la modification.`, 'Erreur');
+      }
+    );
+  }
+
 
   addCar(): void {
     this.carService.addCar(this.car).subscribe({
@@ -322,23 +321,21 @@ export class ProfilInformationComponent implements OnInit {
 
   onDateSelect(event: any) {
     this.end_date_insurance = event;
-    console.log("dateeee", this.end_date_insurance);
   }
   onUpload(event: FileUploadHandlerEvent, document: UserDocuments, uploader: any) {
-    console.log('document:', document);
     const documentType = document.type;
     const nomDocument = this.convertType(documentType);
 
     if (event.files && event.files.length > 0) {
       const file = event.files[0];
 
-       // Vérifier si le document est de type 'insurance'
-    if (documentType === 'insurance') {
-      // Récupérer la nouvelle date d'expiration depuis le calendrier
+      // Vérifier si le document est de type 'insurance'
+      if (documentType === 'insurance') {
+        // Récupérer la nouvelle date d'expiration depuis le calendrier
         this.profilService.addEndDateInsurance(this.formattedDate(this.end_date_insurance)).subscribe({
           next: (data: any) => {
             this.toastr.success('La date d\'expiration de l\'assurance a été enregistré avec succés .', 'Succès');
-          
+
           },
           error: (error: any) => {
             this.toastr.error('Erreur lors du changement de la date d\'expiration de l\'assurance.', 'Erreur');
@@ -382,7 +379,6 @@ export class ProfilInformationComponent implements OnInit {
       reader.onload = () => {
         let base64String: string = reader.result as string;
 
-        console.log('base64String:', base64String);
 
         resolve(base64String);
       };
