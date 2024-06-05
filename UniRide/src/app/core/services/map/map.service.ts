@@ -3,7 +3,7 @@ import { AddressService } from '../address/address.service';
 import { __runInitializers } from 'tslib';
 import { FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { environment } from 'src/environements/environement';
+import { environment } from 'src/environments/environment';
 
 declare var google: any;
 
@@ -23,15 +23,18 @@ export class MapService {
 
   constructor(private addressService: AddressService) { }
 
-  addGoogleMapsScript(renderer: Renderer2, Form: FormGroup, searchInputDeparture: ElementRef<HTMLInputElement>, searchInputArrival: ElementRef<HTMLInputElement>) {
+  addGoogleMapsScript(renderer: Renderer2, form: FormGroup, searchInputDeparture: ElementRef<HTMLInputElement>, searchInputArrival: ElementRef<HTMLInputElement>, setRoutePolyline: boolean = false) {
     const script = renderer.createElement('script');
     script.type = 'text/javascript';
     script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleKey}&libraries=places`;
     script.async = true;
     script.defer = true;
     script.onload = () => {
-      this.initializeAutoComplete(Form, searchInputDeparture, searchInputArrival);
+      this.initializeAutoComplete(form, searchInputDeparture, searchInputArrival);
       this.initializeMap();
+      if (setRoutePolyline) {
+        this.setRoutePolylineFromAddresses(form.controls['addressDeparture'].value, form.controls['addressArrival'].value);
+      }
     }
     renderer.appendChild(document.head, script);
   }

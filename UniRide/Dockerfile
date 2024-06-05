@@ -2,9 +2,15 @@ FROM node:20.9-alpine
 
 WORKDIR /app
 
-ARG PRODUCTION
+ARG production
+ARG backUrl
+ARG frontUrl
+ARG googleKey
 
-ENV PRODUCTION=$PRODUCTION
+ENV production=$production \
+    backUrl=$backUrl \
+    frontUrl=$frontUrl \
+    googleKey=$googleKey
 
 #Copy package.json and package-lock.json to avoid reinstalling dependencies when only code changes
 COPY package*.json ./
@@ -19,8 +25,8 @@ EXPOSE 4200
 #Build the app Angular
 RUN npm install -g @angular/cli
 
-ENTRYPOINT [ "ng" ]
-
 # Start the app Angular with SSL
 #We need to add host to allow the container to be accessed from outside
-CMD ["serve", "--ssl", "true", "--ssl-cert", "certs/flask-selfsigned.crt", "--ssl-key", "certs/flask-selfsigned.key", "--host", "0.0.0.0"]
+CMD apk add --no-cache gettext \
+    && envsubst < src/environments/environment.template.ts > src/environments/environment.ts \
+    && ng serve --ssl true --ssl-cert certs/flask-selfsigned.crt --ssl-key certs/flask-selfsigned.key --host 0.0.0.0

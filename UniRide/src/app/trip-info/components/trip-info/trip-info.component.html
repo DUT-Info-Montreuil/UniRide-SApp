@@ -9,7 +9,10 @@
             <p-panel [showHeader]="false">
                 <p-messages [closable]="false"></p-messages>
                 <div class="flex justify-content-between">
-                    <p-button (click)="back()" label="<" [raised]="true" [text]="true" severity="secondary"></p-button>
+                    <div>
+                        <p-button (click)="back()" label="<" [raised]="true" [text]="true" severity="secondary"></p-button>
+                        <p-button *ngIf="canModify == true" (click)="modifyTrip()" label="Modifier" [raised]="true" [text]="true" severity="secondary"></p-button>
+                    </div>
                     <p-tag [severity]="severity"><i class="text-xl">{{ label
                             }}</i></p-tag>
                 </div>

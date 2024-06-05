@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service'; // Importez le service d'authentification
 import { Observable, throwError } from 'rxjs';
-import { environment } from '../../../../environements/environement';
+import { environment } from '../../../../environments/environment';
 import { UserInterface } from '../../interface/user.interface';
 
 @Injectable({
@@ -53,7 +53,7 @@ export class UserService implements UserInterface {
       'Content-Type': 'application/json',
     });
 
-    return this.http.get(`${this.backUrl}/admin/infos/${id}`, { headers })
+    return this.http.get(`${this.backUrl}/user/infos/${id}`, { headers })
   }
 
   getInfosUserById(userId: number): Observable<any> {
