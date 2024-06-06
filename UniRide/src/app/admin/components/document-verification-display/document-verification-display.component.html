@@ -19,20 +19,20 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="min-width:15rem">
+                <th style="min-width:15rem" scope="col">
                     <div class="flex align-items-center">
                         Numéro de Demande
                         <p-columnFilter type="numeric" field="request_number" display="menu"></p-columnFilter>
                     </div>
                 </th>
-                <th style="min-width:15rem">
+                <th style="min-width:15rem" scope="col">
                     <div class="flex align-items-center">
                         Nombre de Documents à Vérifier
                         <p-columnFilter type="numeric" field="documents_to_verify" display="menu"></p-columnFilter>
                     </div>
                 </th>
 
-                <th style="min-width:15rem">
+                <th style="min-width:15rem" scope="col">
                     <div class="flex align-items-center">
                         Étudiant
                         <p-columnFilter field="user" matchMode="in" display="menu" [showMatchModes]="false"
@@ -58,14 +58,14 @@
                         </p-columnFilter>
                     </div>
                 </th>
-                <th style="min-width:10rem">
+                <th style="min-width:10rem" scope="col">
                     <div class="flex align-items-center">
                         Date de Dernière Modification
                         <p-columnFilter type="date" field="last_modified_date" display="menu"></p-columnFilter>
                     </div>
                 </th>
 
-                <th style="min-width:10rem">
+                <th style="min-width:10rem" scope="col">
                     <div class="flex align-items-center">
                         Action
                     </div>

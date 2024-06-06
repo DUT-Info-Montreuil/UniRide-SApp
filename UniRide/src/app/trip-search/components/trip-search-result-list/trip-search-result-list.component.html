@@ -3,23 +3,23 @@
     [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="proposedDate">
+            <th scope="col" pSortableColumn="proposedDate">
                 Date
                 <p-sortIcon field="proposedDate"></p-sortIcon>
             </th>
-            <th pSortableColumn="departure.numberOfPassenger">
+            <th scope="col" pSortableColumn="departure.numberOfPassenger">
                 Nombre de Passager
                 <p-sortIcon field="departure.numberOfPassenger"></p-sortIcon>
             </th>
-            <th pSortableColumn="distance">
+            <th scope="col" pSortableColumn="distance">
                 Distance du départ
                 <p-sortIcon field="distance"></p-sortIcon>
             </th>
-            <th pSortableColumn="departure.name">
+            <th scope="col" pSortableColumn="departure.name">
                 Départ
                 <p-sortIcon field="departure.name"></p-sortIcon>
             </th>
-            <th pSortableColumn="arrival.name">
+            <th scope="col" pSortableColumn="arrival.name">
                 Arrivée
                 <p-sortIcon field="arrival.name"></p-sortIcon>
             </th>

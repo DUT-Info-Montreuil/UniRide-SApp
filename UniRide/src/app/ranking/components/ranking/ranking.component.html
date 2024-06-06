@@ -15,10 +15,10 @@
                 </ng-template>
                 <ng-template pTemplate="header" let-rowIndex="rowIndex">
                     <tr>
-                        <th style="width: 4rem">
+                        <th scope="col" style="width: 4rem">
                             <span>Position</span>
                         </th>
-                        <th pSortableColumn="user.lastname" style="min-width: 14rem">
+                        <th scope="col" pSortableColumn="user.lastname" style="min-width: 14rem">
                             <div class="flex justify-content-between align-items-center">
                                 Conducteur
                                 <p-sortIcon field="user.lastname"></p-sortIcon>
@@ -46,11 +46,11 @@
                                 </p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="average"> Moyenne Globale <p-sortIcon field="average"></p-sortIcon>
+                        <th scope="col" pSortableColumn="average"> Moyenne Globale <p-sortIcon field="average"></p-sortIcon>
                         </th>
 
                         <!--pSortableColumn="{{column.name}}.value"-->
-                        <th *ngFor="let column of scoreCriteriaColumsDriver" pSortableColumn="{{column.name}}">
+                        <th scope="col" *ngFor="let column of scoreCriteriaColumsDriver" pSortableColumn="{{column.name}}">
                             {{column.name}} <p-sortIcon field="{{column.name}}"></p-sortIcon>
                         </th>
                     </tr>
@@ -111,10 +111,10 @@
                 </ng-template>
                 <ng-template pTemplate="header" let-rowIndex="rowIndex">
                     <tr>
-                        <th style="width: 4rem">
+                        <th scope="col" style="width: 4rem">
                             <span>Position</span>
                         </th>
-                        <th pSortableColumn="user.lastname" style="min-width: 14rem">
+                        <th scope="col" pSortableColumn="user.lastname" style="min-width: 14rem">
                             <div class="flex justify-content-between align-items-center">
                                 Passager
                                 <p-sortIcon field="user.lastname"></p-sortIcon>
@@ -142,11 +142,11 @@
                                 </p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="average"> Moyenne Globale <p-sortIcon field="average"></p-sortIcon>
+                        <th scope="col" pSortableColumn="average"> Moyenne Globale <p-sortIcon field="average"></p-sortIcon>
                         </th>
 
                         <!--pSortableColumn="{{column.name}}.value"-->
-                        <th *ngFor="let column of scoreCriteriaColumsPassenger" pSortableColumn="{{column.name}}">
+                        <th scope="col" *ngFor="let column of scoreCriteriaColumsPassenger" pSortableColumn="{{column.name}}">
                             {{column.name}} <p-sortIcon field="{{column.name}}"></p-sortIcon>
                         </th>
                     </tr>
