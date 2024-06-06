@@ -1,4 +1,7 @@
-FROM node:20.9-alpine
+# Overridable default docker registry
+ARG registry=docker.io
+
+FROM ${registry}/library/node:20.9-alpine
 
 WORKDIR /app
 
