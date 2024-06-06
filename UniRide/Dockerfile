@@ -1,4 +1,6 @@
-FROM node:20.9-alpine
+ARG registry=docker.io
+
+FROM ${registry}/librairy/node:20.9-alpine
 
 WORKDIR /app
 
