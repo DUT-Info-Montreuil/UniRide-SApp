@@ -52,6 +52,20 @@ export class ProfilService {
     return this.http.post<any>(`${this.backUrl}/user/save/${typeRoute}`, formData);
   }
 
+  addEndDateInsurance(endDate:any):Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const jsonData = {
+      "end_date_insurance": endDate
+    };
+
+    return this.http.post<any>(`${this.backUrl}/user/add/end-date`, jsonData, { headers });
+  }
+
+
+
+
   changePassword(changePasswordFormData: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
