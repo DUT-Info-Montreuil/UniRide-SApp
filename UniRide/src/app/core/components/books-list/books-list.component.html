@@ -5,9 +5,9 @@
             <ng-template class="flex justify-content-center" pTemplate="header">
                 <h3>Vos demandes</h3>
                 <tr>
-                    <th pSortableColumn="date_requested">Date<p-sortIcon field="DateRequested"></p-sortIcon></th>
-                    <th pSortableColumn="accepted">Trajet<p-sortIcon field="trip"></p-sortIcon></th>
-                    <th></th>
+                    <th scope="col" pSortableColumn="date_requested">Date<p-sortIcon field="DateRequested"></p-sortIcon></th>
+                    <th scope="col" pSortableColumn="accepted">Trajet<p-sortIcon field="trip"></p-sortIcon></th>
+                    <th scope="col"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-book>

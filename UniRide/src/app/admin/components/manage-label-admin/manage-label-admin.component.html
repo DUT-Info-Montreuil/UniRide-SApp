@@ -22,19 +22,19 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="id_criteria" style="min-width: 15rem">
+                <th pSortableColumn="id_criteria" style="min-width: 15rem" scope="col">
                     ID <p-sortIcon field="id_criteria"></p-sortIcon>
                 </th>
 
-                <th pSortableColumn="name" style="min-width: 15rem">
+                <th pSortableColumn="name" style="min-width: 15rem" scope="col">
                     Nom <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="description">
+                <th pSortableColumn="description" scope="col">
                     Description <p-sortIcon field="description"></p-sortIcon>
                 </th>
-                <th pSortableColumn="role" style="min-width:10rem">Role <p-sortIcon field="labelRole"></p-sortIcon>
+                <th pSortableColumn="role" style="min-width:10rem" scope="col">Role <p-sortIcon field="labelRole"></p-sortIcon>
                 </th>
-                <th>Action</th>
+                <th scope="col">Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-label>
