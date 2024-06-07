@@ -1,5 +1,5 @@
 <h1 class="text-white">Trajets Conducteur</h1>
-<p-button pRipple severity="danger" label="Delete" icon="pi pi-trash" (click)="deleteSelectedTrips()" [disabled]="!selectedTrips || !selectedTrips.length"></p-button>
+<p-button pRipple severity="danger" label="Delete" icon="pi pi-trash" (click)="deleteSelectedTrips()" [disabled]="!selectedTrips || !selectedTrips.length" id="tripproposed-button-deletetrip"></p-button>
 
 <p-table [value]="trips" [(selection)]="selectedTrips" [tableStyle]="{'min-width': '60rem'}" [loading]="loading" dataKey="id" [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [filterDelay]="0">
     <ng-template pTemplate="header">
@@ -27,7 +27,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-trip>
-        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)">
+        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)" id="tripproposed-tr-tripdetails">
             <td>
                 <p-tableCheckbox [value]="trip" (click)="$event.stopPropagation()" />
             </td>

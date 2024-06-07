@@ -1,4 +1,4 @@
-<p-button *ngIf="document.url.startsWith('data:application/pdf')" (click)="displayPDF()" icon="pi pi-external-link"
+<p-button *ngIf="document.url.startsWith('data:application/pdf')" (click)="displayPDF()" id="displaypdf-button-showpdf" icon="pi pi-external-link"
     label="Afficher"></p-button>
 <p-dialog *ngIf="document.url.startsWith('data:application/pdf')" [(visible)]="display" #dialog
     (onShow)="dialog.maximize()" (onMaximize)="render()">

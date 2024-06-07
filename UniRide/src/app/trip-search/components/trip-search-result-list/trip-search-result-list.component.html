@@ -26,7 +26,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-trip>
-        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)">
+        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)" id="tripsearchresult-tr-trip">
             <td>
                 {{trip.proposedDate | date: 'dd/MM/yyyy HH:mm'}}
             </td>

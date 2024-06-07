@@ -13,7 +13,7 @@
           <i class="pi pi-map"></i>
         </span>
         <span class="p-float-label">
-          <input pInputText formControlName="addressDeparture" #searchInputDeparture />
+          <input pInputText formControlName="addressDeparture" id="modifytrip-input-addressdeparture" #searchInputDeparture />
           <label htmlFor="addressDeparture">Adresse de départ</label>
         </span>
       </div>
@@ -22,7 +22,7 @@
           <i class="pi pi-map"></i>
         </span>
         <span class="p-float-label">
-          <input pInputText formControlName="addressArrival" #searchInputArrival />
+          <input pInputText formControlName="addressArrival" id="modifytrip-input-addressarrival" #searchInputArrival />
           <label htmlFor="addressArrival">Adresse d'arrivée</label>
         </span>
       </div>
@@ -34,24 +34,24 @@
                         :deep(.p-icon) {
                             color: #3a82f6;
                         },
-                      }"></p-calendar>
+                      }" id="modifytrip-calendar-departuredate"></p-calendar>
         </div>
       </div>
       <div class="flex-auto m-2 my-4">
         <label for="nbPassenger" class="font-bold block mb-2"> Heure de départ</label>
         <p-calendar formControlName="time" [timeOnly]="true" [readonlyInput]="true"
-          placeholder="Heure de départ"></p-calendar>
+          placeholder="Heure de départ" id="modifytrip-calendar-departurehour"></p-calendar>
       </div>
   
       <div class="flex-auto m-2 my-4">
         <label for="nbPassenger" class="font-bold block mb-2"> Nombre de Passagers </label>
-        <p-inputNumber formControlName="passengerNumber" [showButtons]="true" inputId="stacked" [min]="1" [max]="6">
+        <p-inputNumber formControlName="passengerNumber" [showButtons]="true" inputId="stacked" [min]="1" [max]="6" id="modifytrip-input-passengernumber">
         </p-inputNumber>
       </div>
       <div class="flex justify-content-end mt-3">
         <p-button severity="secondary" class="mr-1" icon="pi pi-times"
-            label="Annuler" (onClick)="cancel()"></p-button>
-        <p-button severity="primary" icon="pi pi-check" label="Enregistrer" (onClick)="onSubmit()"></p-button>
+            label="Annuler" (onClick)="cancel()" id="modifytrip-button-cancel"></p-button>
+        <p-button severity="primary" icon="pi pi-check" label="Enregistrer" (onClick)="onSubmit()" id="modifytrip-button-save"></p-button>
     </div>
     </form>
   </p-card>
