@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { aboutRoutingModule } from './about.rooting.module';
+import { AboutRoutingModule } from './about.rooting.module';
 import { ConditionsComponent } from './components/conditions/conditions.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 
@@ -13,7 +13,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
   ],
   imports: [
     SharedModule,
-    aboutRoutingModule
+    AboutRoutingModule
   ]
 })
 export class AboutModule { }
