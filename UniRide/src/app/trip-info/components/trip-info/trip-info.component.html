@@ -9,7 +9,10 @@
             <p-panel [showHeader]="false">
                 <p-messages [closable]="false"></p-messages>
                 <div class="flex justify-content-between">
-                    <p-button (click)="back()" label="<" [raised]="true" [text]="true" severity="secondary"></p-button>
+                    <div>
+                        <p-button (click)="back()" label="<" [raised]="true" [text]="true" severity="secondary" id="tripinfo-button-back"></p-button>
+                        <p-button *ngIf="canModify == true" (click)="modifyTrip()" label="Modifier" [raised]="true" [text]="true" severity="secondary" id="tripinfo-button-edittrip"></p-button>
+                    </div>
                     <p-tag [severity]="severity"><i class="text-xl">{{ label
                             }}</i></p-tag>
                 </div>
@@ -56,21 +59,21 @@
                             *ngIf="(!alreadyBooked || book.accepted == -2) && userId != trip.driverId && trip.status == 1"
                             (click)="bookTrip()"
                             [disabled]="(trip.numberOfPassenger ?? 0) >= (trip.totalNumberOfPassenger ?? 0)"
-                            icon="pi pi-check" label="Réserver"></p-button>
+                            icon="pi pi-check" label="Réserver" id="tripinfo-button-booktrip"></p-button>
                         <div *ngIf="userId == trip.driverId && trip.status == 1">
                             <p-button severity="danger" (click)="cancelTrip()" class="mr-1" icon="pi pi-times"
-                                label="Annuler"></p-button>
+                                label="Annuler" id="tripinfo-button-canceltrip"></p-button>
                             <p-button severity="success" (click)="startTrip()" [disabled]="!canStartTrip"
-                                icon="pi pi-check" label="Commencer"></p-button>
+                                icon="pi pi-check" label="Commencer" id="tripinfo-button-starttrip"></p-button>
                         </div>
                     <div *ngIf="trip.status == 3 && (book.accepted == 1)">
-                        <p-button (click)="showDialog()" label="Noter le trajet" [disabled]="alreadyRated"></p-button>
+                        <p-button (click)="showDialog()" label="Noter le trajet" [disabled]="alreadyRated" id="tripinfo-button-ratetrip"></p-button>
                     </div>
                         <p-button severity="danger" *ngIf="userId == trip.driverId && trip.status == 4"
-                            (click)="endTrip()" icon="pi pi-times" label="Terminer"></p-button>
+                            (click)="endTrip()" icon="pi pi-times" label="Terminer" id="tripinfo-button-endtrip"></p-button>
                         <p-button severity="danger"
                             *ngIf="alreadyBooked && book.accepted != -2 && !book.joined && trip.status != 2 && trip.status != 3"
-                            (click)="cancelBooking()" icon="pi pi-times" label="Annuler"></p-button>
+                            (click)="cancelBooking()" icon="pi pi-times" label="Annuler" id="tripinfo-button-cancelbooktrip"></p-button>
                     </div>
                 </div>
             </p-panel>

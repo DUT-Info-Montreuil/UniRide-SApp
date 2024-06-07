@@ -3,26 +3,26 @@
     [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [filterDelay]="0">
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="status">
+            <th scope="col" pSortableColumn="status">
                 Status
                 <p-sortIcon field="status"></p-sortIcon>
             </th>
-            <th pSortableColumn="departure_date">
+            <th scope="col" pSortableColumn="departure_date">
                 Date
                 <p-sortIcon field="departure_date"></p-sortIcon>
             </th>
-            <th pSortableColumn="departure_address">
+            <th scope="col" pSortableColumn="departure_address">
                 Départ
                 <p-sortIcon field="departure_address"></p-sortIcon>
             </th>
-            <th pSortableColumn="arrival_address">
+            <th scope="col" pSortableColumn="arrival_address">
                 Arrivée
                 <p-sortIcon field="arrival_address"></p-sortIcon>
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-trip>
-        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)">
+        <tr [pSelectableRow]="trip" (click)="goToTripDetails(trip.id)" id="trippassenger-tr-tripdetails">
             <td>
                 <span class="p-column-title">Status</span>
                 <p-tag [value]="getStatus(trip.status, trip.book_status)"

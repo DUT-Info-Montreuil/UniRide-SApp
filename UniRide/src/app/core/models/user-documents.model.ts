@@ -3,4 +3,5 @@ export class UserDocuments {
     status!: string
     type!: string
     description!: string
+    end_date_insurance!:Date
 }

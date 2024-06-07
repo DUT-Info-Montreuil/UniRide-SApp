@@ -17,19 +17,19 @@
         [globalFilterFields]="['id_user', 'country.name', 'representative.name', 'status']">
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                    (click)="clear(displayUsers)"></button>
+                <button id="user-list-admin-button-clear-filter" pButton label="Réinitialiser les filtres"
+                    class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(displayUsers)"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="min-width:15rem">
+                <th scope="col" style="min-width:15rem">
                     <div class="flex align-items-center">
                         ID
                         <p-columnFilter type="numeric" field="id_user" display="menu"></p-columnFilter>
                     </div>
                 </th>
-                <th style="min-width:15rem">
+                <th scope="col" style="min-width:15rem">
                     <div class="flex align-items-center">
                         Utilisateur
                         <p-columnFilter field="etudiant" matchMode="in" display="menu" [showMatchModes]="false"
@@ -54,18 +54,18 @@
                         </p-columnFilter>
                     </div>
                 </th>
-                <th style="min-width:10rem">
+                <th scope="col" style="min-width:10rem">
                     <div class="flex align-items-center">
                         Date de dernière modification
                         <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
                     </div>
                 </th>
-                <th style="min-width:10rem">
+                <th scope="col" style="min-width:10rem">
                     <div class="flex align-items-center">
-                <th pSortableColumn="role"> Rôle <p-sortIcon field="role"></p-sortIcon>
+                <th scope="col" pSortableColumn="role"> Rôle <p-sortIcon field="role"></p-sortIcon>
 </div>
 </th>
-<th style="min-width:10rem">
+<th scope="col" style="min-width:10rem">
     <div class="flex align-items-center">
         Action
     </div>
@@ -91,7 +91,8 @@
 
         <td>
             <a (click)="manageRequestVerificationDocument(lisUsers.id)">
-                <p-button label="Gérer" [rounded]="true" severity="warning"></p-button>
+                <p-button id="user-list-admin-button-manage" label="Gérer" [rounded]="true"
+                    severity="warning"></p-button>
             </a>
         </td>
     </tr>

@@ -1,13 +1,17 @@
-<p-button class="m-2" severity="secondary" [text]="true" (click)="op.toggle($event)" icon="pi pi-car"></p-button>
-<p-overlayPanel #op [showCloseIcon]="false" [style]="{width:'450px','max-height':'550px', overflow:'scroll', 'padding': 0 ,'border':'none'}" [showCloseIcon]="false">
+<p-button id="book-list-button-books" class="m-2" severity="secondary" [text]="true" (click)="op.toggle($event)"
+    icon="pi pi-car"></p-button>
+<p-overlayPanel #op [showCloseIcon]="false"
+    [style]="{width:'450px','max-height':'550px', overflow:'scroll', 'padding': 0 ,'border':'none'}"
+    [showCloseIcon]="false">
     <ng-template pTemplate="content">
         <p-table [value]="books" selectionMode="single" [(selection)]="selectedBook" responsiveLayout="scroll">
             <ng-template class="flex justify-content-center" pTemplate="header">
                 <h3>Vos demandes</h3>
                 <tr>
-                    <th pSortableColumn="date_requested">Date<p-sortIcon field="DateRequested"></p-sortIcon></th>
-                    <th pSortableColumn="accepted">Trajet<p-sortIcon field="trip"></p-sortIcon></th>
-                    <th></th>
+                    <th scope="col" pSortableColumn="date_requested">Date<p-sortIcon field="DateRequested"></p-sortIcon>
+                    </th>
+                    <th scope="col" pSortableColumn="accepted">Trajet<p-sortIcon field="trip"></p-sortIcon></th>
+                    <th scope="col"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-book>
@@ -18,13 +22,13 @@
                             <p>{{book.user.firstname}} {{book.user.lastname}}</p>
                             <p-accordionTab [header]="convertToFrenchDate(book.trip.departure_date)" class="p-0">
                                 <h4>Départ</h4>
-                                    <p class="m-0 text-xs">
-                                        {{book.trip.departure_address}}
-                                    </p>
-                                    <h4>Arrivée</h4>
-                                    <p class="m-0 text-xs">
-                                        {{book.trip.arrival_address}}
-                                    </p>
+                                <p class="m-0 text-xs">
+                                    {{book.trip.departure_address}}
+                                </p>
+                                <h4>Arrivée</h4>
+                                <p class="m-0 text-xs">
+                                    {{book.trip.arrival_address}}
+                                </p>
                             </p-accordionTab>
                         </p-accordion>
                     </td>
@@ -34,8 +38,14 @@
                                 <i class="pi pi-lock" style="font-size: 3rem"></i>
                             </p-blockUI>
                             <div class="buttons" *ngIf="book.accepted == 0">
-                                <p-button (click)="answerBook(book.trip.id, book.user.id, 1, book)" [disabled]="book.accepted != 0" icon="pi pi-check" [rounded]="true" size="small" severity="success"></p-button>
-                                <p-button (click)="answerBook(book.trip.id, book.user.id, -1, book)" [disabled]="book.accepted != 0" icon="pi pi-times" [rounded]="true" size="small" severity="danger"></p-button>
+                                <p-button id="book-list-button-answer-accept"
+                                    (click)="answerBook(book.trip.id, book.user.id, 1, book)"
+                                    [disabled]="book.accepted != 0" icon="pi pi-check" [rounded]="true" size="small"
+                                    severity="success"></p-button>
+                                <p-button id="book-list-button-answer-refused"
+                                    (click)="answerBook(book.trip.id, book.user.id, -1, book)"
+                                    [disabled]="book.accepted != 0" icon="pi pi-times" [rounded]="true" size="small"
+                                    severity="danger"></p-button>
                             </div>
                             <div *ngIf="book.accepted == 1">
                                 <p-tag severity="success" value="Accepté"></p-tag>

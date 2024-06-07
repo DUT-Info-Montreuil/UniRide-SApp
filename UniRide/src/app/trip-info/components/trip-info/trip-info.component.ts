@@ -9,11 +9,11 @@ import { Location } from '@angular/common'
 import { tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from '../../../core/services/book/book.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Book } from 'src/app/core/models/book.models';
 import { RatingComponent } from '../rating/rating.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +23,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
   providers: [ConfirmationService, MessageService, DialogService],
 })
 export class TripInfoComponent implements OnInit {
-
+  
   trip!: Trip;
   userId!: Number;
   qrCodeValue!: string;
@@ -39,6 +39,8 @@ export class TripInfoComponent implements OnInit {
   label!: string;
   ref: DynamicDialogRef | undefined;
   alreadyRated: boolean = false;
+  canModify: boolean = false;
+
 
   constructor(
     private tripService: TripService,
@@ -50,13 +52,14 @@ export class TripInfoComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private location: Location,
     private toastr: ToastrService,
-    private authService: AuthService,
     private messageService: MessageService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.getUserID();
+    this.userId = Number(sessionStorage.getItem("user_id"))
+    this.getTripDetails()
   }
 
   getTripDetails(): void {
@@ -86,6 +89,7 @@ export class TripInfoComponent implements OnInit {
         this.checkCanStartTrip()
         this.setStatusLabel();
         this.setSeverity();
+        this.checkCanModify();
       })).subscribe()
   }
 
@@ -98,7 +102,6 @@ export class TripInfoComponent implements OnInit {
   }
 
   renderMap(): void {
-
     this.addressService.callUniversityAddress().pipe(
       tap(() => {
         this.mapService.addMap(this.renderer, this.trip.departure.name, this.trip.arrival.name)
@@ -244,9 +247,6 @@ export class TripInfoComponent implements OnInit {
     });
   }
 
-  
-
-
   back(): void {
     this.location.back();
   }
@@ -263,11 +263,6 @@ export class TripInfoComponent implements OnInit {
         }
         )).subscribe();
     }
-  }
-
-  getUserID(): void {
-    this.userId = Number(sessionStorage.getItem("user_id"))
-    this.getTripDetails()
   }
 
   displayBookingStatus(): void {
@@ -295,5 +290,13 @@ export class TripInfoComponent implements OnInit {
       tap((data: any) => {
         this.qrCodeValue = `${environment.frontUrl}/validate-passenger?trip-id=${this.trip.id}&user-id=${this.userId}&code=${data.verification_code}`;
       })).subscribe();
+  }
+  
+  checkCanModify(): void {
+    this.canModify = this.trip.driverId == this.userId && this.trip.status == 1  && (this.trip.numberOfPassenger == undefined || this.trip.numberOfPassenger == 0);
+  }
+
+  modifyTrip(): void {
+    this.router.navigate([`/trips/${this.trip.id}/modify`]);
   }
 }
