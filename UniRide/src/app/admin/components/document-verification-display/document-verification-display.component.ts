@@ -7,6 +7,7 @@ import { StatisticService } from '../../../core/services/statistic/statistic.ser
 import { ToastrService } from 'ngx-toastr'
 import { User } from '../../../core/models/user.model'
 
+
 @Component({
   selector: 'app-document-verification-display',
   templateUrl: './document-verification-display.component.html',
@@ -26,7 +27,12 @@ export class DocumentVerificationDisplayComponent implements OnInit {
   documentVerification: DocumentVerificationDisplay[] = []
   users: User[] = [] // a changer avec un modele
   loading: boolean = true
+  value!:boolean
   @ViewChild('dt1') table!: Table
+  stateOptions = [
+    { label: 'On', value: true },
+    { label: 'Off', value: false }
+  ];
 
   constructor(
     private documentVerificationService: DocumentVerificationService,
@@ -39,6 +45,7 @@ export class DocumentVerificationDisplayComponent implements OnInit {
     this.setOptionsDoughnutStatistic()
     this.getStatisticsDocument()
     this.getDocumentVerification()
+    this.getStatusVerificationInsurance()
   }
 
   /**
@@ -125,4 +132,58 @@ export class DocumentVerificationDisplayComponent implements OnInit {
   setOptionsDoughnutStatistic() {
     this.options = this.statisticsService.setOptionsDoughnut()
   }
+
+    /**
+   * This method is called when the button state changes
+   */
+    toggleService() {
+      if (this.value) {
+        this.startVerificationEndDateInsurance();
+      } else {
+        this.stopVerificationEndDateInsurance();
+      }
+    }
+  
+    /**
+     * Call the API to start the verification end date insurance service
+     */
+    startVerificationEndDateInsurance() {
+      this.documentVerificationService.start_verification_end_date_insurance().subscribe(
+        (response: any) => {
+          
+        },
+        (error: any) => {
+          
+        }
+      );
+    }
+  
+    /**
+     * Call the API to stop the verification end date insurance service
+     */
+    stopVerificationEndDateInsurance() {
+      this.documentVerificationService.stop_verification_end_date_insurance().subscribe(
+        (response: any) => {
+          
+        },
+        (error: any) => {
+          
+        }
+      );
+    }
+  /**
+     * Call the API to get the status of verification end date insurance service
+     */
+    getStatusVerificationInsurance(){
+      this.documentVerificationService.status_verifiacation_insurance().subscribe(
+        (response: any) => {
+         
+          this.value=response.status
+        },
+        (error: any) => {
+          
+        }
+      );
+
+    }
 }

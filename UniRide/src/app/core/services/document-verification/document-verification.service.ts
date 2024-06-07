@@ -58,6 +58,30 @@ export class DocumentVerificationService {
     );
   }
 
+  start_verification_end_date_insurance(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.backUrl}/admin/cron/insurance/start`,  { headers });
+  }
+
+  stop_verification_end_date_insurance(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.backUrl}/admin/cron/insurance/stop`,  { headers });
+  }
+
+  status_verifiacation_insurance(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.backUrl}/admin/cron/insurance/status`,  { headers });
+  }
+
   /**
  * Function to convert the status of the document
  * @param status 
