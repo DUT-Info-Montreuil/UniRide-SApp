@@ -10,7 +10,7 @@
         <!-- Login -->
         <div id="div_login" class="mb-4 flex flex-column justify-content-center">
             <label for="login" class="block text-sm font-semibold mb-2">Nom d'Utilisateur ou Adresse Email</label>
-            <input type="text" pInputText formControlName="login" [maxlength]="50" />
+            <input type="text" pInputText formControlName="login" [maxlength]="50" id="login-input-login"/>
         </div>
 
         <!-- Password -->
@@ -18,21 +18,21 @@
             <label for="password" class="block text-sm font-semibold mb-2">Mot de Passe</label>
             <p-password id="password" formControlName="password" inputId="password" required [toggleMask]="true"
                 [feedback]="false" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
-                [maxlength]="50"></p-password>
+                [maxlength]="50" id="login-password-password"></p-password>
         </div>
 
         <!-- Stay Connected -->
         <div class="mb-4 flex flex-column justify-content-center">
-            <p-checkbox label="Rester connecté" formControlName="keepLoggedIn" [binary]="true"></p-checkbox>
+            <p-checkbox label="Rester connecté" formControlName="keepLoggedIn" [binary]="true" id="login-checkbox-keeploggedin"></p-checkbox>
         </div>
         <div class="flex justify-content-center flex-wrap">
-            <p-button type="submit" label="Se connecter" [disabled]="!connexionForm.valid"></p-button>
+            <p-button type="submit" label="Se connecter" [disabled]="!connexionForm.valid" id="login-button-login"></p-button>
         </div>
         <div class="flex-container">
-            <a href="/change-password">Mot de passe oublié</a>
+            <a href="/change-password" id="login-a-changepassword">Mot de passe oublié</a>
         </div>
         <div class="register">
-            <p>Vous n'avez pas de compte ? <a href="/registration">Créer un compte</a></p>
+            <p>Vous n'avez pas de compte ? <a href="/registration" id="login-input-register">Créer un compte</a></p>
         </div>
     </p-card>
 </form>
