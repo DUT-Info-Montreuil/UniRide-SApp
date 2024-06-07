@@ -56,8 +56,9 @@
             </p>
             <p-toast></p-toast>
             <p-confirmPopup></p-confirmPopup>
-            <p-button (click)="performAction($event,'Êtes-vous sûr de vouloir supprimer l\'utilisateur ?')"
-                icon="pi pi-check" label="Supprimer" severity="danger" [rounded]="true"></p-button>
+            <p-button id="user-info-admin-button-delete-user"
+                (click)="performAction($event,'Êtes-vous sûr de vouloir supprimer l\'utilisateur ?')" icon="pi pi-check"
+                label="Supprimer" severity="danger" [rounded]="true"></p-button>
         </p-card>
     </p-card>
 </div>
