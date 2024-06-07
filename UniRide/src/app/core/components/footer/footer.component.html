@@ -4,20 +4,21 @@
             <div class="one">
                 <h3 class="f-title f_600 t_color f_size_18">Navigation</h3>
                 <ul class="list-unstyled f_list">
-                    <li> <a [routerLink]="['']"> Accueil </a></li>
-                    <li> <a [routerLink]="['registration']"> Inscription </a></li>
-                    <li> <a [routerLink]="['/login']"> Connexion </a></li>
+                    <li> <a id="footer-a-home" [routerLink]="['']"> Accueil </a></li>
+                    <li> <a id="footer-a-registration" [routerLink]="['/registration']"> Inscription </a></li>
+                    <li> <a id="footer-a-login" [routerLink]="['/login']"> Connexion </a></li>
                 </ul>
             </div>
             <div class="two">
                 <h3 class="f-title f_600 t_color f_size_18">Aide et Ressources</h3>
                 <ul class="list-unstyled f_list">
-                    <li> <a [routerLink]="['/about/conditions']"> Conditions d'utilisation
+                    <li> <a id="footer-a-conditions" [routerLink]="['/about/conditions']"> Conditions d'utilisation
                         </a></li>
-                    <li> <a href="https://github.com/DUT-Info-Montreuil/UniRide-SApp/blob/main/README.md"
+                    <li> <a id="footer-a-github-link"
+                            href="https://github.com/DUT-Info-Montreuil/UniRide-SApp/blob/main/README.md"
                             target="_blank"> Documentation
                         </a></li>
-                    <li> <a [routerLink]="['/about/privacy']"> Politique de confidentialité
+                    <li> <a id="footer-a-privacy" [routerLink]="['/about/privacy']"> Politique de confidentialité
                         </a></li>
 
                 </ul>
