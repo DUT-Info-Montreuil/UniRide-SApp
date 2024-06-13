@@ -1,24 +1,21 @@
-<div class="flex justify-content-center flex-wrap carte  mb-3">
+<div class="flex justify-content-center flex-wrap carte mb-3">
     <div class="card flex justify-content-center">
         <p-card header="Analyse des Utilisateurs">
             <p-chart type="doughnut" [data]="dataUser" [options]="options" height="20vh"></p-chart>
         </p-card>
     </div>
-    <div class=" card flex justify-content-center">
-        <p-card header="Analyse des Trajets ">
+    <div class="card flex justify-content-center">
+        <p-card header="Analyse des Trajets">
             <p-chart type="doughnut" [data]="dataTrip" [options]="options" height="20vh"></p-chart>
         </p-card>
     </div>
 </div>
 <div class="card">
-    <p-table #displayUsers [value]="lisUsers" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
-        currentPageReportTemplate="Affichage de {first} à {last} sur un total de {totalRecords} utilisateurs"
-        [globalFilterFields]="['id_user', 'country.name', 'representative.name', 'status']">
+    <p-table #displayUsers [value]="lisUsers" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true" currentPageReportTemplate="Affichage de {first} à {last} sur un total de {totalRecords} utilisateurs"
+        [globalFilterFields]="['id', 'firstname', 'lastname', 'last_modified_date']">
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button id="user-list-admin-button-clear-filter" pButton label="Réinitialiser les filtres"
-                    class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(displayUsers)"></button>
+                <button id="user-list-admin-button-clear-filter" pButton label="Réinitialiser les filtres" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(displayUsers)"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -26,26 +23,23 @@
                 <th scope="col" style="min-width:15rem">
                     <div class="flex align-items-center">
                         ID
-                        <p-columnFilter type="numeric" field="id_user" display="menu"></p-columnFilter>
+                        <p-columnFilter type="numeric" field="id" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th scope="col" style="min-width:15rem">
                     <div class="flex align-items-center">
                         Utilisateur
-                        <p-columnFilter field="etudiant" matchMode="in" display="menu" [showMatchModes]="false"
-                            [showOperator]="false" [showAddButton]="false">
+                        <p-columnFilter field="firstname" matchMode="contains" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                             <ng-template pTemplate="header">
                                 <div class="px-3 pt-3 pb-0">
                                     <span class="font-bold">Sélectionneur d'utilisateurs</span>
                                 </div>
                             </ng-template>
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                <p-multiSelect #userMultiSelect [ngModel]="value" [options]="lisUsers"
-                                    placeholder="Tous" (onChange)="filter($event.value)" optionLabel="firstname">
+                                <p-multiSelect #userMultiSelect [ngModel]="value" [options]="lisUsers" placeholder="Tous" (onChange)="filter($event.value)" optionLabel="firstname">
                                     <ng-template let-option pTemplate="item">
                                         <div class="inline-block vertical-align-middle">
-                                            <img alt="photo de profil" src="{{ option.profile_picture }}" width="24"
-                                                class="vertical-align-middle" />
+                                            <img alt="photo de profil" src="{{ option.profile_picture }}" width="24" class="vertical-align-middle" />
                                             <span class="ml-1 mt-1">{{ option.firstname + " " + option.lastname}}</span>
                                         </div>
                                     </ng-template>
@@ -57,50 +51,49 @@
                 <th scope="col" style="min-width:10rem">
                     <div class="flex align-items-center">
                         Date de dernière modification
-                        <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                        <p-columnFilter type="date" field="last_modified_date" display="menu"></p-columnFilter>
                     </div>
                 </th>
                 <th scope="col" style="min-width:10rem">
                     <div class="flex align-items-center">
-                <th scope="col" pSortableColumn="role"> Rôle <p-sortIcon field="role"></p-sortIcon>
-</div>
-</th>
-<th scope="col" style="min-width:10rem">
-    <div class="flex align-items-center">
-        Action
-    </div>
-</th>
-</tr>
-</ng-template>
-<ng-template pTemplate="body" let-lisUsers>
-    <tr>
-        <td>
-            {{ lisUsers.id}}
-        </td>
-        <td>
-            <img [alt]="lisUsers.lastname" src="{{ lisUsers.profile_picture }}" width="32"
-                style="vertical-align: middle" />
-            <span class="ml-1 vertical-align-middle">{{ lisUsers.lastname + " " + lisUsers.firstname }}</span>
-        </td>
-        <td>
-            {{ lisUsers.last_modified_date | date: 'dd/MM/yyyy' }}
-        </td>
-        <td>
-            <p-tag [value]="convertRoleUser(lisUsers.role)" [severity]="getSeverityUser(lisUsers.role)"></p-tag>
-        </td>
-
-        <td>
-            <a (click)="manageRequestVerificationDocument(lisUsers.id)">
-                <p-button id="user-list-admin-button-manage" label="Gérer" [rounded]="true"
-                    severity="warning"></p-button>
-            </a>
-        </td>
-    </tr>
-</ng-template>
-<ng-template pTemplate="emptymessage">
-    <tr>
-        <td colspan="7">Aucun utilisateur n'a été trouvé.</td>
-    </tr>
-</ng-template>
-</p-table>
+                        Rôle
+                        <th pSortableColumn="role">
+                            <p-sortIcon field="role"></p-sortIcon>
+                    </div>
+                    </th>
+                    <th scope="col" style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Action
+                        </div>
+                    </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>
+                    {{ user.id }}
+                </td>
+                <td>
+                    <img [alt]="user.lastname" src="{{ user.profile_picture }}" width="32" style="vertical-align: middle" />
+                    <span class="ml-1 vertical-align-middle">{{ user.lastname + " " + user.firstname }}</span>
+                </td>
+                <td>
+                    {{ user.last_modified_date | date: 'dd/MM/yyyy' }}
+                </td>
+                <td>
+                    <p-tag [value]="convertRoleUser(user.role)" [severity]="getSeverityUser(user.role)"></p-tag>
+                </td>
+                <td>
+                    <a (click)="manageRequestVerificationDocument(user.id)">
+                        <p-button id="user-list-admin-button-manage" label="Gérer" [rounded]="true" severity="warning"></p-button>
+                    </a>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7">Aucun utilisateur n'a été trouvé.</td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
