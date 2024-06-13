@@ -99,7 +99,7 @@ export class UserListComponent implements OnInit {
 
   /**
    * Clear the filters of the table
-   * @param table 
+   * @param table
    */
   clear(table: Table) {
     this.toastr.success('Tous les filtres ont été réinitialisés avec succès.', 'Info')
@@ -108,8 +108,8 @@ export class UserListComponent implements OnInit {
 
   /**
  * This method is used to convert the role from a number to a string
- * @param role 
- * @returns 
+ * @param role
+ * @returns
  */
   convertRoleUser(role: any) {
     return this.userService.convertRole(role)
@@ -117,8 +117,8 @@ export class UserListComponent implements OnInit {
 
   /**
    * Return the severity of role  user
-   * @param status 
-   * @returns 
+   * @param status
+   * @returns
    */
   getSeverityUser(status: number) {
     return this.userService.getSeverity(status)
@@ -130,7 +130,7 @@ export class UserListComponent implements OnInit {
 
   /**
    * Retur the chart of the number of trips
-   * @param status 
+   * @param status
    * @returns
    */
   getDataTrip(trip_infos: any) {
@@ -149,7 +149,7 @@ export class UserListComponent implements OnInit {
 
   /**
    * Return the chart of the number of users
-   * @param status 
+   * @param status
    * @returns
    */
   getDataUser(user_infos: any) {
