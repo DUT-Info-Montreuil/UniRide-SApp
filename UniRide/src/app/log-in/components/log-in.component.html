@@ -9,21 +9,21 @@
 
         <!-- Login -->
         <div id="div_login" class="mb-4 flex flex-column justify-content-center">
-            <label for="login" class="block text-sm font-semibold mb-2">Nom d'Utilisateur ou Adresse Email</label>
+            <label for="login-input-login" class="block text-sm font-semibold mb-2">Nom d'Utilisateur ou Adresse Email</label>
             <input type="text" pInputText formControlName="login" [maxlength]="50" id="login-input-login"/>
         </div>
 
         <!-- Password -->
         <div id="div_password" class="mb-4 flex flex-column justify-content-center">
-            <label for="password" class="block text-sm font-semibold mb-2">Mot de Passe</label>
-            <p-password id="password" formControlName="password" inputId="password" required [toggleMask]="true"
+            <label for="login-password-password" class="block text-sm font-semibold mb-2">Mot de Passe</label>
+            <p-password formControlName="password" inputId="login-password-password" required [toggleMask]="true"
                 [feedback]="false" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
-                [maxlength]="50" id="login-password-password"></p-password>
+                [maxlength]="50"></p-password>
         </div>
 
         <!-- Stay Connected -->
         <div class="mb-4 flex flex-column justify-content-center">
-            <p-checkbox label="Rester connecté" formControlName="keepLoggedIn" [binary]="true" id="login-checkbox-keeploggedin"></p-checkbox>
+            <p-checkbox label="Rester connecté" formControlName="keepLoggedIn" [binary]="true" inputId="login-checkbox-keeploggedin"></p-checkbox>
         </div>
         <div class="flex justify-content-center flex-wrap">
             <p-button type="submit" label="Se connecter" [disabled]="!connexionForm.valid" id="login-button-login"></p-button>
