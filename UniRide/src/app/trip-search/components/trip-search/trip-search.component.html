@@ -28,24 +28,24 @@
     </div>
     <div class="p-inputgroup m-2 my-4 flex">
       <div class="flex-auto">
-        <label for="nbPassenger" class="font-bold block"> Date de départ </label>
+        <label for="tripsearch-calendar-departureDate" class="font-bold block"> Date de départ </label>
         <p-calendar formControlName="date" [showIcon]="true" [touchUI]="true" [minDate]="minDate" [showButtonBar]="true"
           [readonlyInput]="true" placeholder="Date de départ" :pt="{
                       :deep(.p-icon) {
                           color: #3a82f6;
                       },
-                    }" id="tripsearch-calendar-departureDate"></p-calendar>
+                    }" inputId="tripsearch-calendar-departureDate"></p-calendar>
       </div>
     </div>
     <div class="flex-auto m-2 my-4">
-      <label for="nbPassenger" class="font-bold block mb-2"> Heure de départ</label>
+      <label for="tripsearch-calendar-departureHour" class="font-bold block mb-2"> Heure de départ</label>
       <p-calendar formControlName="time" [timeOnly]="true" [readonlyInput]="true"
-        placeholder="Heure de départ" id="tripsearch-calendar-departureHour"></p-calendar>
+        placeholder="Heure de départ" inputId="tripsearch-calendar-departureHour"></p-calendar>
     </div>
 
     <div class="flex-auto m-2 my-4">
-      <label for="nbPassenger" class="font-bold block mb-2"> Nombre de Passagers </label>
-      <p-inputNumber id="tripsearch-inputNumber-nbPassenger" formControlName="passengerNumber" [showButtons]="true" inputId="stacked" [min]="1" [max]="6">
+      <label for="tripsearch-inputNumber-nbPassenger" class="font-bold block mb-2"> Nombre de Passagers </label>
+      <p-inputNumber inputId="tripsearch-inputNumber-nbPassenger" formControlName="passengerNumber" [showButtons]="true" inputId="stacked" [min]="1" [max]="6">
       </p-inputNumber>
     </div>
     <div class="flex justify-content-center mx-2 mt-4">
