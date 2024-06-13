@@ -155,7 +155,7 @@ export class UserListComponent implements OnInit {
   getDataUser(user_infos: any) {
     const color = ['#b74f6f', "#adbdff", "#3185fc", "#34e5ff"]
     this.dataUser = {
-      labels: ['Total des administrateurs', 'Total compte en attente', 'Total des conducteurs', 'Total des passagers'],
+      labels: ['Total des administrateurs', 'Total des comptes en attente', 'Total des conducteurs', 'Total des passagers'],
       datasets: [
         {
           data: [user_infos.admin_count_value, user_infos.pending_count_value, user_infos.drivers_count_value, user_infos.passenger_count_value],

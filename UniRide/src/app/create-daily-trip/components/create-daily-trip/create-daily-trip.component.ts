@@ -52,7 +52,7 @@ export class CreateDailyTripComponent implements OnInit {
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
       hour: ['', Validators.required],
-      passengerNumber: [1, [Validators.required, Validators.min(1), Validators.max(8)]],
+      passengerNumber: [1, [Validators.required, Validators.min(1), Validators.max(6)]],
       days: [[], Validators.required] // pour les jours de la semaine
     });
     if (!this.addressService.getUniversityAddress()) {
