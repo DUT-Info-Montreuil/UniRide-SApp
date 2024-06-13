@@ -33,8 +33,8 @@ export class RegistrationComponent implements OnInit {
     this.inscriptionForm = this.formBuilder.group({
       showDriverSection: [false], // Assure-toi que cette ligne est présente
       login: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9._-]{1,50}$/)]],
-      firstname: ['', [Validators.required, Validators.pattern(/^[A-Za-z-]{1,50}$/)]],
-      lastname: ['', [Validators.required, Validators.pattern(/^[A-Za-z-]{1,50}$/)]],
+      firstname: ['', [Validators.required, Validators.pattern(/^[A-zÀ-ÿ]{1,50}$/)]],
+      lastname: ['', [Validators.required, Validators.pattern(/^[A-zÀ-ÿ]{1,50}$/)]],
       student_email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^((?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])){8,50}/),],],
       password_confirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
