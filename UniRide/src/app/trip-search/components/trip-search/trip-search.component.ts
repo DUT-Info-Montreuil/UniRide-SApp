@@ -37,7 +37,7 @@ export class TripSearchComponent implements OnInit {
       addressArrival: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
-      passengerNumber: ['', [Validators.required, Validators.max(4)]]
+      passengerNumber: ['', [Validators.required, Validators.max(6)]]
     });
     if (!this.addressService.getUniversityAddress()) {
       this.addressService.callUniversityAddress().pipe(

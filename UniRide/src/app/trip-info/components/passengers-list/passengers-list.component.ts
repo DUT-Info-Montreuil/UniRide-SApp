@@ -17,7 +17,7 @@ export class PassengersListComponent implements OnInit {
   @Input() totalNumberOfPassenger!: number;
   @Input() numberOfPassenger!: number;
   passengers: User[] = [];
-  ref: DynamicDialogRef | undefined; 
+  ref: DynamicDialogRef | undefined;
 
   constructor(
     private tripService: TripService,
@@ -52,7 +52,7 @@ export class PassengersListComponent implements OnInit {
               firstname: passenger.firstname,
               lastname: passenger.lastname,
               id: passenger.id,
-              profile_picture: passenger.pfp,
+              profile_picture: passenger.profile_picture,
               joined: passenger.joined
             };
             i++;
@@ -64,7 +64,7 @@ export class PassengersListComponent implements OnInit {
 
   getStatusLabel(status?: boolean): string {
     switch (status) {
-      case true: return 'À Board';
+      case true: return 'À Bord';
       case false: return 'À Récupérer';
       default: return 'Inconnu';
     }
@@ -81,19 +81,19 @@ export class PassengersListComponent implements OnInit {
   showDialog(passengerid: number) {
     console.log(passengerid)
     if (passengerid >= -1) {
-    this.ref = this.dialogService.open(UserInfoComponent, {
-      style: { width: '50vw' },
-      data: {
-        userid: passengerid
-      },
-      header: "Details du profil"
-    })
+      this.ref = this.dialogService.open(UserInfoComponent, {
+        style: { width: '50vw' },
+        data: {
+          userid: passengerid
+        },
+        header: "Details du profil"
+      })
+    }
   }
-}
 
-  ngOnDestroy() { 
-    if (this.ref) { 
-        this.ref.close(); 
-    } 
-} 
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
+    }
+  }
 }
